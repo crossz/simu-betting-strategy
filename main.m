@@ -25,7 +25,7 @@ game_data = py.matlab_starter.matlab_get_data();
 
 n = size(game_data,2);
 uid = zeros(n,1);
-summary = zeros(n,4);
+summary = zeros(n,5);
 summary_result_cell = cell(1,n);
 summary_operation_cell = cell(1,n);
 for i = 1:n
@@ -47,7 +47,6 @@ for i = 1:n
     % % data for analysis
     uid_i = double(gd.unique_id);
     uid(i) = uid_i;
-    summary(i,:) = [double(gd.unique_id), double(it.invest), double(it.winning), double(it.money)];
     
     % % self.analyzer.insert_result(self.winning, self.invest, self.money + self.winning)
     r = it.result_dict;
@@ -59,16 +58,33 @@ for i = 1:n
     
     o_cell = cell(o);
     summary_operation_cell{i} = o_cell;
+
+    
+    % summary list
+    co_ornot = size(o,2) == 6;    
+    summary(i,:) = [double(gd.unique_id), double(it.invest), double(it.winning), double(it.money), co_ornot];
     
 end
 
 %% data analysis
 format long g;
+
+% total sum
 sum_summary = sum(summary);
-
-% display firt 10 games:
-disp(summary(1:10,:));
-
-% show sum
+disp('## total summary: ');
 disp(sum_summary);
+
+% CO sum
+ind_co = find(summary(:,5)==1);
+sum_co = summary(ind_co,:);
+disp('## CO summary: ');
+disp(sum(sum_co));
+ind_co_not = find(summary(:,5)==0);
+sum_co_not = summary(ind_co_not,:);
+disp('## No-CO summary: ');
+disp(sum(sum_co_not));
+
+
+
+
 

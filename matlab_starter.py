@@ -30,7 +30,7 @@ def matlab_get_data():
 
 def process_one_game(game):
 
-    i = WhoScoreInvestor.WhoScoreInvestor(game, strong_team=True)
+    i = WhoScoreInvestor.WhoScoreInvestor(game, strong_team=False)
     i.game_processing()
     return i
 
