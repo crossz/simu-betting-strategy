@@ -1,13 +1,13 @@
+import pickle
+
 import LoadData
 import WhoScoreInvestor
-
-import pickle
 
 GameData = LoadData.GameData
 
 
 
-mode = 'r'
+mode = 'w'
 
 
 def getGameData():
@@ -16,11 +16,16 @@ def getGameData():
 
         pickle.dump(game_data, open("game_data.p", "wb"))
     elif mode == 'r':
-        game_data = pickle.load(open('game_data.p','rb'))
+        game_data = matlab_get_data()
     else:
         game_data=[]
 
     return game_data
+
+
+def matlab_get_data():
+    gamedata = pickle.load(open('game_data.p', 'rb'))
+    return gamedata
 
 
 def process_one_game(game):

@@ -19,7 +19,7 @@ py.reload(mod_it);
 py.matlab_starter.helloworld()
 
 % % get data
-game_data = py.matlab_starter.getGameData();
+game_data = py.matlab_starter.matlab_get_data();
 
 %% process data
 
