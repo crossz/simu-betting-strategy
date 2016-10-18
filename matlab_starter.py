@@ -1,9 +1,9 @@
-import LoadData1
+import LoadData
 import WhoScoreInvestor
 
 import pickle
 
-GameData = LoadData1.GameData
+GameData = LoadData.GameData
 
 
 
