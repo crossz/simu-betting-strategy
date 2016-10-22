@@ -1,6 +1,5 @@
 # -*- coding=utf-8 -*-
-import random
-# from Strategy import *
+import maimaiUtil
 import Strategy
 Strategy = Strategy.Strategy
 
@@ -11,12 +10,14 @@ class WhoScoreInvestor(Strategy):
     Only When the team which is set up scored earlier than the opposite, the investor would cash out all the tickets.
     """
 
-    def __init__(self, game_data, strong_team=False):
+    def __init__(self, game_data, strong_team=False, co_action=True):
         Strategy.__init__(self, game_data)
         self.result_dict['strategy_args'] = {
             'strong_team': strong_team
         }
         self.strong_team = strong_team
+        self.co_action = co_action
+
         self.score = '0-0'
 
     def buy_ticket(self, odds_set):
@@ -29,25 +30,28 @@ class WhoScoreInvestor(Strategy):
             return
 
 
-
-
-
-
-
-
-
-
-
-
+        stake_set = maimaiUtil.buy_1(odds_set)
 
         self.ticket_bucket = {
-            0: {0: (odds_set[0], 1.0/3)},
-            1: {0: (odds_set[1], 1.0/3)},
-            2: {0: (odds_set[2], 1.0/3)}
+            0: {0: (odds_set[0], stake_set[0])},
+            1: {0: (odds_set[1], stake_set[1])},
+            2: {0: (odds_set[2], stake_set[2])}
         }
-        self.store_operation(1, 0, odds_set[0], 1.0/3)
-        self.store_operation(1, 1, odds_set[1], 1.0/3)
-        self.store_operation(1, 2, odds_set[2], 1.0/3)
+        self.store_operation(1, 0, odds_set[0], stake_set[0])
+        self.store_operation(1, 1, odds_set[1], stake_set[1])
+        self.store_operation(1, 2, odds_set[2], stake_set[2])
+
+
+        # self.ticket_bucket = {
+        #     0: {0: (odds_set[0], 1.0/3)},
+        #     1: {0: (odds_set[1], 1.0/3)},
+        #     2: {0: (odds_set[2], 1.0/3)}
+        # }
+        # self.store_operation(1, 0, odds_set[0], 1.0/3)
+        # self.store_operation(1, 1, odds_set[1], 1.0/3)
+        # self.store_operation(1, 2, odds_set[2], 1.0/3)
+
+
         self.invest = 1
         self.money = 0
 

@@ -6,8 +6,8 @@ import WhoScoreInvestor
 GameData = LoadData.GameData
 
 
-
 mode = 'w'
+mode = 'r'
 
 
 def getGameData():
@@ -30,12 +30,12 @@ def matlab_get_data():
 
 def process_one_game(game):
 
-    i = WhoScoreInvestor.WhoScoreInvestor(game, strong_team=False)
+    i = WhoScoreInvestor.WhoScoreInvestor(game, strong_team=False, co_action=True)
     i.game_processing()
     return i
 
 
-## demo for MATLAB calling py.XXX.search(...)
+# # demo for MATLAB calling py.XXX.search(...)
 def helloworld():
     return "Matlab says: 'Hello Python.'"
 

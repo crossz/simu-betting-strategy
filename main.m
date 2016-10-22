@@ -15,6 +15,7 @@ py.reload(mod_main);
 mod_it = py.importlib.import_module('WhoScoreInvestor');
 py.reload(mod_it);
 
+
 % % test: python environment
 py.matlab_starter.helloworld()
 
@@ -85,6 +86,19 @@ disp('## No-CO summary: ');
 disp(sum(sum_co_not));
 
 
+%% segamental analysis
+slice_size = 10; 
+[slice_summary, slice_sum] = segmental_analysis(summary, slice_size);
+[slice_summary_co, slice_sum_co] = segmental_analysis(sum_co, slice_size);
+[slice_summary_co_not, slice_sum_co_not] = segmental_analysis(sum_co_not, slice_size);
 
 
-
+% % 
+if size(slice_sum_co, 1) ~= 0 && size(slice_sum_co_not, 1) ~= 0
+    slice_sum_mat = cell2mat(slice_sum);
+    slice_sum_mat = [slice_sum_mat, slice_sum_mat(:,3)./slice_sum_mat(:,2)];
+    slice_sum_co_mat = cell2mat(slice_sum_co);
+    slice_sum_co_mat = [slice_sum_co_mat, slice_sum_co_mat(:,3)./slice_sum_co_mat(:,2)];
+    slice_sum_co_not_mat = cell2mat(slice_sum_co_not);
+    slice_sum_co_not_mat = [slice_sum_co_not_mat, slice_sum_co_not_mat(:,3)./slice_sum_co_not_mat(:,2)];
+end
